@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>金融教育向け ブラウン運動シミュレーション</title>
+  <!-- Google Fonts: Noto Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #ece9e6, #ffffff);
+      margin: 0;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #333;
+    }
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .explanation {
+      max-width: 800px;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+    #chart-area {
+      max-width: 800px;
+      width: 100%;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+    svg {
+      width: 100%;
+      height: 400px;
+      display: block;
+    }
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #888;
+      shape-rendering: crispEdges;
+    }
+    .axis text {
+      font-size: 12px;
+      fill: #555;
+    }
+    button {
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #5a67d8;
+      color: #fff;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-bottom: 20px;
+    }
+    button:hover {
+      background-color: #434190;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <h1>金融教育向け ブラウン運動シミュレーション</h1>
+  
+  <!-- 説明文 前半 -->
+  <div class="explanation">
+    <p>
+      本シミュレーションでは、株価が時間とともにランダムに変動する様子を、「ブラウン運動」という確率過程モデルで再現しています。もともとは、液体中の微粒子が無作為に動く現象を説明するために提唱されたモデルですが、金融の世界では、株価もまた多くの要因により予測が難しいランダムな動きを示すと考えられています。
+    </p>
+    <p>
+      たとえば、ブラック・ショールズ方程式では、株価の動きを「幾何ブラウン運動」としてモデル化することで、オプションの理論価格を導いています。ここでは、まず基本となるブラウン運動の概念を視覚的に理解していただくため、シンプルなモデルでシミュレーションを行っています。
+    </p>
+  </div>
+
+  <!-- グラフ描画領域 -->
+  <div id="chart-area">
+    <svg></svg>
+  </div>
+
+  <!-- 説明文 後半 -->
+  <div class="explanation">
+    <p>
+      グラフの横軸は「時間」、縦軸は「株価」を表しています。時間の経過とともに、株価が上下にランダムに変動する様子を観察してみてください。シミュレーションを繰り返すことで、株価の不確実性やリスク評価の基本的な考え方に触れることができます。
+    </p>
+    <p>
+      実際の金融市場では、株価は投資家の心理や経済状況など、複数の要素が絡み合って動いています。まずはこのシンプルなモデルを通じて、リスク管理や価格付けの基礎となる確率過程の考え方に親しんでいただければと思います。グラフ下の「もう一回」ボタンで、シミュレーションをリセットして再度観察できますので、ぜひご活用ください。
+    </p>
+  </div>
+  
+  <!-- リセットボタン -->
+  <button id="resetBtn">もう一回</button>
+
+  <script>
+    // グラフ描画領域のサイズとマージン設定
+    const margin = { top: 40, right: 40, bottom: 50, left: 60 },
+          outerWidth = 800,
+          outerHeight = 400,
+          width = outerWidth - margin.left - margin.right,
+          height = outerHeight - margin.top - margin.bottom;
+
+    // SVGの設定
+    const svg = d3.select("svg")
+      .attr("width", outerWidth)
+      .attr("height", outerHeight);
+
+    // g要素を作成してマージン分移動
+    const g = svg.append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // スケールの設定
+    const xScale = d3.scaleLinear()
+      .domain([0, width])
+      .range([0, width]);
+
+    const yScale = d3.scaleLinear()
+      .domain([0, height])
+      .range([height, 0]);
+
+    // 軸の定義
+    const xAxis = d3.axisBottom(xScale).ticks(10);
+    const yAxis = d3.axisLeft(yScale).ticks(10);
+
+    // x軸の描画とラベル（中央配置）
+    g.append("g")
+      .attr("class", "x axis")
+      .attr("transform", `translate(0,${height})`)
+      .call(xAxis)
+      .append("text")
+      .attr("fill", "#000")
+      .attr("x", width / 2)
+      .attr("y", 40)
+      .attr("text-anchor", "middle")
+      .text("時間");
+
+    // y軸の描画とラベル（中央配置、回転）
+    g.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+      .append("text")
+      .attr("fill", "#000")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -height / 2)
+      .attr("y", -45)
+      .attr("text-anchor", "middle")
+      .text("株価");
+
+    // 初期データ（株価はグラフ中央からスタート）
+    let data = [{ x: 0, y: height / 2 }];
+    let xPos = 0;
+    let yPos = height / 2;
+
+    // 折れ線パスの生成
+    const line = d3.line()
+      .x(d => xScale(d.x))
+      .y(d => yScale(d.y))
+      .curve(d3.curveBasis);
+
+    // パスの初期描画
+    const path = g.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 2);
+
+    // アニメーション用タイマー
+    let timer = null;
+
+    // 株価更新関数（時間方向に5ピクセルずつ、yはランダム変動）
+    function update() {
+      xPos += 5;
+      yPos += (Math.random() - 0.5) * 20;
+      if (yPos < 0) yPos = 0;
+      if (yPos > height) yPos = height;
+      data.push({ x: xPos, y: yPos });
+
+      // グラフ右端に達したらデータをシフト
+      if (xPos > width) {
+        data.shift();
+        data = data.map(d => ({ x: d.x - 5, y: d.y }));
+        xPos -= 5;
+      }
+      path.attr("d", line);
+    }
+
+    // シミュレーション開始
+    function startSimulation() {
+      if (timer) timer.stop();
+      timer = d3.interval(update, 50);
+    }
+
+    // リセット処理（シミュレーションの再起動）
+    function resetSimulation() {
+      if (timer) timer.stop();
+      data = [{ x: 0, y: height / 2 }];
+      xPos = 0;
+      yPos = height / 2;
+      path.datum(data).attr("d", line);
+      startSimulation();
+    }
+
+    document.getElementById("resetBtn").addEventListener("click", resetSimulation);
+
+    // 初期起動
+    startSimulation();
+  </script>
+</body>
+</html>
