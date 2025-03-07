@@ -33,5 +33,30 @@ This simulation is provided for educational purposes only and is not intended as
 Developed by [Miyoko Shimura](https://www.linkedin.com/in/miyoko-shimura/).
 
 ## ライセンス / License
-This project is provided "as is" without any warranty.  
-このプロジェクトは現状有姿で提供され、明示的にも黙示的にも一切の保証を伴いません。
+
+### English (MIT License)
+
+The MIT License (MIT)  
+
+Copyright (c) 2025 Miyoko Shimura  
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+### 日本語 (MITライセンス)
+
+MITライセンス（MIT）  
+
+著作権 (c) 2025 Miyoko Shimura  
+
+本ソフトウェアおよび関連するドキュメントファイル（以下「本ソフトウェア」）のコピーを取得するすべての人に対し、本ソフトウェアを無制限に使用、複製、改変、統合、公開、配布、サブライセンス、販売する権利を無償で許可します。ただし、以下の条件が適用されます。
+
+上記の著作権表示および本許可表示は、本ソフトウェアのすべてのコピーまたは重要な部分に含めるものとします。
+
+本ソフトウェアは「現状のまま」提供され、明示的または黙示的なあらゆる保証（商品性、特定の目的への適合性、および非侵害を含むがこれらに限定されない）を伴いません。著者または著作権者は、本ソフトウェアまたはその使用に起因するいかなる請求、損害、またはその他の責任についても、一切の責任を負わないものとします。
+
