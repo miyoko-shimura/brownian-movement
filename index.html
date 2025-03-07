@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>株価のランダムウォーク: 初心者向け金融シミュレーション</title>
+  <title>株価のランダムウォーク<br>金融シミュレーション</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Google Fonts: Noto Sans -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
@@ -46,10 +46,10 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       margin-bottom: 30px;
     }
+    /* SVGに viewBox を設定し、レスポンシブに */
     svg {
       width: 100%;
       height: auto;
-      aspect-ratio: 2 / 1; /* 800x400の比率 */
       display: block;
     }
     .axis path,
@@ -108,7 +108,8 @@
 
   <!-- グラフ描画領域 -->
   <div id="chart-area">
-    <svg></svg>
+    <!-- viewBox属性と preserveAspectRatio 属性を追加 -->
+    <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet"></svg>
   </div>
 
   <!-- 説明文 後半 -->
@@ -125,19 +126,19 @@
   <button id="resetBtn">もう一回</button>
 
   <script>
-    // グラフ描画領域のサイズとマージン設定
+    // グラフ描画領域のサイズとマージン設定（固定サイズ 800×400）
     const margin = { top: 40, right: 40, bottom: 50, left: 60 },
           outerWidth = 800,
           outerHeight = 400,
           width = outerWidth - margin.left - margin.right,
           height = outerHeight - margin.top - margin.bottom;
 
-    // SVGの設定
+    // SVG の取得（viewBox属性を使っているので幅・高さは固定）
     const svg = d3.select("svg")
       .attr("width", outerWidth)
       .attr("height", outerHeight);
 
-    // g要素を作成してマージン分移動
+    // g 要素を作成してマージン分移動
     const g = svg.append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -154,7 +155,7 @@
     const xAxis = d3.axisBottom(xScale).ticks(10);
     const yAxis = d3.axisLeft(yScale).ticks(10);
 
-    // x軸を描画し、ラベルを中央に配置
+    // x 軸の描画とラベル（中央配置）
     g.append("g")
       .attr("class", "x axis")
       .attr("transform", `translate(0,${height})`)
@@ -166,7 +167,7 @@
       .attr("text-anchor", "middle")
       .text("時間");
 
-    // y軸を描画し、ラベルを中央に配置
+    // y 軸の描画とラベル（中央配置、回転）
     g.append("g")
       .attr("class", "y axis")
       .call(yAxis)
