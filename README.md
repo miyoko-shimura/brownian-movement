@@ -9,6 +9,9 @@ This project is a web application that simulates the random walk (Brownian motio
 - [オンラインデモはこちら](https://brownian-movement-finance.netlify.app/)  
 - [View the live demo](https://brownian-movement-finance.netlify.app/)
 
+  ![image](https://github.com/user-attachments/assets/2aeb3efd-2a60-4035-a296-fb40eaf5ee45)
+
+
 ## 技術スタック / Tech Stack
 - HTML, CSS, JavaScript
 - D3.js を用いたデータビジュアライゼーション / Data visualization using D3.js
