@@ -78,6 +78,24 @@
       background-color: #434190;
       transform: translateY(-2px);
     }
+    /* フッター */
+    footer {
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #777;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+    }
+    footer a {
+      color: #5a67d8;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
     /* モバイル向けレスポンシブ調整 */
     @media (max-width: 600px) {
       h1 {
@@ -127,6 +145,16 @@
   
   <!-- リセットボタン -->
   <button id="resetBtn">もう一回</button>
+  
+  <!-- フッター（Miyoko ShimuraのLinkedInリンクとdisclaimer） -->
+  <footer>
+    <p>
+      Developed by <a href="https://www.linkedin.com/in/miyoko-shimura/" target="_blank" rel="noopener noreferrer">Miyoko Shimura</a>
+    </p>
+    <p>
+      Disclaimer: 本シミュレーションは教育目的で提供されており、投資アドバイスを意図したものではありません。利用者は、自己の責任において本シミュレーションをご利用ください。当方は、本シミュレーションの使用に関連して発生したいかなる損害や損失に対しても、一切の責任を負いません。
+    </p>
+  </footer>
 
   <script>
     // グラフ描画領域のサイズとマージン設定（固定サイズ 800×400）
